@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.Weather.WeatherFragment">
+
+    <TextView
+        android:id="@+id/city_id"
+        android:layout_width="176dp"
+        android:layout_height="68dp"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/temp_id"
+        android:layout_width="201dp"
+        android:layout_height="79dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/btn_savedata"
+        android:layout_width="match_parent"
+        android:text="Save Weather data"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
