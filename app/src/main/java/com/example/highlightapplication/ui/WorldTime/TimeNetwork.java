@@ -1,11 +1,11 @@
-package com.example.highlightapplication.ui.Weather;
+package com.example.highlightapplication.ui.WorldTime;
 
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
 import com.example.highlightapplication.GlobalCity;
+import com.example.highlightapplication.ui.Weather.NetworkingService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,42 +16,34 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class NetworkingService {
+public class TimeNetwork {
+    String TAG="TimeNetwork";
 
-    String TAG="NetworkingService";
-
-    String weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=";
-    String weatherURL2 = "&appid=f59b4e088282b559b972242f999207eb";
-
-  //  https://www.amdoren.com/api/timezone.php?api_key=IBZzdLmM2yCYaXjgTZ6x&loc=New+York
-
-    String url = "http://gd.geobytes.com/AutoCompleteCity?&q=";
-    String url2 ="&appid=f59b4e088282b559b972242f999207eb";
+   String url = "http://worldtimeapi.org/api/timezone";
 
     public static final ExecutorService networkingExecutor = Executors.newFixedThreadPool(4);
     static Handler networkHander = new Handler(Looper.getMainLooper());
 
-    public NetworkingService(NetworkingListener networkingListener) {
+    public TimeNetwork(NetworkingListener networkingListener) {
         listener = networkingListener;
     }
 
     NetworkingListener listener;
-
     interface NetworkingListener{
         void APINetworkListner(String jsonString);
-       //void APINetworkingListerForImage(Bitmap image);
+        //void APINetworkingListerForImage(Bitmap image);
     }
 
-    public void fetchCitiesData(String text) {
-        String completeURL = url + text + url2;
-        connect(completeURL,"cities");
+    public void fetchTimeZone(String text) {
+        String completeURL = url + text;
+        connect(completeURL,"timezoneList");
     }
 
-    public void fetchWeatherData(GlobalCity selectedCity){
+   /* public void fetchWeatherData(GlobalCity selectedCity){
         String completeURL = weatherURL+selectedCity.getCityName()+weatherURL2;
         Log.d(TAG,"Method call="+completeURL);
         connect(completeURL,"weather");
-    }
+    }*/
 
     private void connect(String url,String type) {
         networkingExecutor.execute(new Runnable() {
@@ -97,5 +89,5 @@ public class NetworkingService {
             }
         });
     }
-    }
+}
 

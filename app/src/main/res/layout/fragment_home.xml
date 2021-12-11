@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".ui.Weather.WeatherFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/Linen"
+        android:text="Weather"
+        android:textAlignment="center" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

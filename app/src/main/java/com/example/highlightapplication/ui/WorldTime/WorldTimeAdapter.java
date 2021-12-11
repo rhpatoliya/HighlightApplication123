@@ -7,6 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class WorldTimeAdapter extends RecyclerView.Adapter<WorldTimeAdapter.ViewHolder> {
+
+    public interface CityclickListner {
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -22,6 +26,7 @@ public class WorldTimeAdapter extends RecyclerView.Adapter<WorldTimeAdapter.View
     public int getItemCount() {
         return 0;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {

@@ -6,9 +6,11 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_worldtime.xml" value="0.11911231884057971" />
         <entry key="app/src/main/res/layout/home_recyclerview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/weather_recyclreview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/weatherdetails.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/worldtime_recyclerview.xml" value="0.23020833333333332" />
       </map>
     </option>
   </component>
