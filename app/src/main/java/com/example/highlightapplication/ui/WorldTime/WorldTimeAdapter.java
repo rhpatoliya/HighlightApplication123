@@ -1,36 +1,68 @@
 package com.example.highlightapplication.ui.WorldTime;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.highlightapplication.GlobalCity;
+import com.example.highlightapplication.R;
+import com.example.highlightapplication.ui.Weather.WeatherAdapter;
+
+import java.util.ArrayList;
+
 public class WorldTimeAdapter extends RecyclerView.Adapter<WorldTimeAdapter.ViewHolder> {
 
-    public interface CityclickListner {
+    interface CityclickListner {
+        public void cityClicked(GlobalCity selectedCity);
+    }
+    private Context mCtx;
+    public ArrayList<GlobalCity> cityList;
+    CityclickListner listner;
+
+    public WorldTimeAdapter(Context context, ArrayList<GlobalCity> cityList, CityclickListner cityclickListner) {
+        this.mCtx = context;
+        this.cityList = cityList;
+        listner = cityclickListner;
     }
 
-    @NonNull
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.worldtime_recyclerview, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+    public void onBindViewHolder( ViewHolder holder, int position) {
+        GlobalCity t = cityList.get(position);
+        holder.city_time.setText(t.getCityName() );
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cityList.size();
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(@NonNull View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView city_time, countryTextView;
+
+        public ViewHolder( View itemView) {
             super(itemView);
+            city_time = itemView.findViewById(R.id.city_time);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listner.cityClicked(cityList.get(getAdapterPosition()));
+
         }
     }
 }

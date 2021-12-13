@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.highlightapplication.GlobalCity;
@@ -36,8 +37,8 @@ public class WorldTimeFragment extends Fragment implements SearchView.OnQueryTex
     String TAG="WorldTimeFragment";
 
     Context appContext;
-    WeatherAdapter adapter;
-    ArrayList<GlobalCity> timezone = new ArrayList<>();
+    WorldTimeAdapter adapter;
+    ArrayList<GlobalCity> timezoneList = new ArrayList<>();
     TimeNetwork timeNetwork;
     TimeJason timeJason;
     RecyclerView recyclerview_time;
@@ -50,8 +51,15 @@ public class WorldTimeFragment extends Fragment implements SearchView.OnQueryTex
         timeJason = new TimeJason();
 
 
-
         worldtime_searchview = view.findViewById(R.id.worldtime_searchview);
+        recyclerview_time = view.findViewById(R.id.recyclerview_time);
+
+        adapter = new WorldTimeAdapter(appContext,timezoneList,this);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerview_time.setLayoutManager(mLayoutManager);
+        recyclerview_time.setAdapter(adapter);
+
+
 
         worldtime_searchview.setOnQueryTextListener(this);
         worldtime_searchview.setQueryHint("Search City for World Time");
@@ -75,8 +83,8 @@ public class WorldTimeFragment extends Fragment implements SearchView.OnQueryTex
             timeNetwork.fetchTimeZone(newText);
         }
         else {
-            timezone = new ArrayList<>(0);
-            adapter.cityList=timezone;
+            timezoneList = new ArrayList<>(0);
+            adapter.cityList=timezoneList;
             adapter.notifyDataSetChanged();
         }
         return false;
@@ -86,11 +94,12 @@ public class WorldTimeFragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public void APINetworkListner(String jsonString) {
-        timezone =  timeJason.parseCitiesAPIJson(jsonString);
-        adapter.cityList = timezone;
+        timezoneList =  timeJason.parseCitiesAPIJson(jsonString);
+        adapter.cityList = timezoneList;
         adapter.notifyDataSetChanged();
     }
 
+/*
 
     @Override
     public void cityClicked(GlobalCity selectedCity) {
@@ -103,12 +112,18 @@ public class WorldTimeFragment extends Fragment implements SearchView.OnQueryTex
 
 
     }
+*/
 
     @Override
     public boolean onClose() {
-        timezone = new ArrayList<>(0);
-        adapter.cityList=timezone;
+        timezoneList = new ArrayList<>(0);
+        adapter.cityList=timezoneList;
         adapter.notifyDataSetChanged();
         return true;
+    }
+
+    @Override
+    public void cityClicked(GlobalCity selectedCity) {
+
     }
 }

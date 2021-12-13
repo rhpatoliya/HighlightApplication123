@@ -17,7 +17,7 @@ import java.util.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
-    interface CityclickListner {
+    public interface CityclickListner {
         public void cityClicked(GlobalCity selectedCity);
     }
 
